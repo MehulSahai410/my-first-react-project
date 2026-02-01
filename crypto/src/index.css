@@ -10,31 +10,31 @@
     sans-serif;
   line-height: 1.5;
   font-weight: 400;
-  -webkit-font-smoothing: antialiased;
+  -webkit-font-smoothing: antialiased; /* this for smooth transition of font from web to mobile*/
   -moz-osx-font-smoothing: grayscale;
 }
 
 body {
-  margin: 0;
+  margin: 2;
   min-width: 320px;
   min-height: 100vh;
 }
 
 .app {
   min-height: 100vh;
-  background: #010203;
-  padding: 0;
+  background: #000000;
+  padding: 0;/*padding is used for defining for area for text */
 }
 
 /* Header Styles */
 .header {
-  /* background: rgba(20, 20, , 1); */
+   background: rgb(164, 232, 189); 
   backdrop-filter: blur(20px);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 8px 32px rgba(220, 100, 100, 0.4);
   padding: 2rem 0;
-  position: sticky;
+  position: sticky; /* This is used for positioning the header at the top we use fixed also */
   top: 0;
-  z-index: 100;
+  z-index: 100; /* Used for keeping the header at the top */
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
@@ -42,7 +42,7 @@ body {
   max-width: 1400px;
   margin: 0 auto;
   padding: 0 2rem;
-  display: flex;
+  display: flex; /* flex se hum perfect styling k liye kaam krhe hai */
   justify-content: space-between;
   align-items: center;
   gap: 2rem;
@@ -51,7 +51,7 @@ body {
 
 .logo-section h1 {
   font-size: 2.5rem;
-  background: #add8e6;
+  background: #0f9f9f;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -60,29 +60,30 @@ body {
 }
 
 .logo-section p {
-  color: #a0a0b0;
+  color: #030606;
   font-size: 0.95rem;
 }
 
 .search-section {
   flex: 1;
   max-width: 500px;
+  background-color: #b0ade6;
 }
 
 .search-input {
   width: 100%;
   padding: 1rem 1.5rem;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(73, 246, 4, 0);
   border-radius: 50px;
   font-size: 1rem;
   transition: all 0.3s ease;
   background: rgba(255, 255, 255, 0.05);
-  color: #fff;
+  color: #ae1919;
   backdrop-filter: blur(10px);
 }
 
 .search-input::placeholder {
-  color: #6b6b7a;
+  color: #050505;
 }
 
 .search-input:focus {
@@ -212,7 +213,7 @@ body {
     rgba(173, 216, 230, 0.5),
     transparent
   );
-  opacity: 0;
+  opacity: 0;/*transparency control krne ke liye */
   transition: opacity 0.3s ease;
 }
 
