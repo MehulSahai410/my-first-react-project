@@ -3,7 +3,13 @@ import {fetchCoinData,fetchChartData} from "../api/CoinGecko";
 import {useState,useEffect} from "react";
 import { useNavigate } from 'react-router-dom';
 import { formatPrice } from "../utils/formatter";
-import {LineChart, ResponsiveContainer} from "recharts";
+import {CartesianGrid,
+   LineChart, 
+   ResponsiveContainer,
+   XAxis,
+   YAxis,
+   Line,
+   Tooltip} from "recharts";
 export const CoinDetail=() => {
     const {id} = useParams();
     const navigate= useNavigate();
@@ -12,6 +18,7 @@ export const CoinDetail=() => {
      const[isLoading, setToLoading]=useState(true);
       useEffect(() =>{
       loadCoinData();
+      loadChartData();
       
       },[id]);
     const loadCoinData= async() =>{
@@ -25,6 +32,26 @@ export const CoinDetail=() => {
                     setToLoading(false);
                 }
     }
+     const loadChartData= async() =>{
+        try{ const data= await fetchChartData(id); // data is being fetched here
+                const formattedData=data.prices.map((price,key)=>({
+                  time:new Date(price[0]).toLocaleDateString("en-US",{
+                    month:"short",
+                    day:"numeric"
+                 } ),
+                  price: price[1].toFixed(2),
+
+                }));
+                setChartData(formattedData);
+              }
+                catch(err)
+                {
+                    console.error("Error fetching crypto:",err);
+                }
+                finally{
+                    setToLoading(false);
+                }
+};
 
      
 if (isLoading) {
@@ -80,7 +107,41 @@ if (isLoading) {
     </div>
     <div className="chart-section"><h3>Price chart(7 days)</h3>
     <ResponsiveContainer width="100%" height={400}>
-        <LineChart data={chartData}>
+            <LineChart data={chartData}>
+              <CartesianGrid
+                strokeDasharray="3 3"
+                stroke="rgba(10, 5, 52, 0.05)"
+              />
+    
+        <XAxis dataKey="time"
+         stroke="#ADD8E7"
+         style={{fontSize:"12px"}}
+         />
+        <YAxis  
+          stroke="#ADD8E8"
+          style={{fontSize:"12px"}}
+          domain={["auto","auto"]}
+        
+        
+        
+        />
+         <Tooltip
+                contentStyle={{
+                  backgroundColor: "rgba(20, 20, 40, 0.95)",
+                  border: "1px solid rgba(255, 255, 255, 0.1)",
+                  borderRadius: "8px",
+                  color: "#c21919",
+                }}
+         />
+
+        <Line
+        type="monotone"
+        dataKey="price"
+        stroke="#b9c6cb"
+        strokeWidth={3}
+        dot={false}
+        
+        />
 
         </LineChart>
     </ResponsiveContainer>
